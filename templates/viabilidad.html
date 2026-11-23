@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}<section class="intro"><span class="scope">Viabilidad económica</span><h1>Calcula el margen de tu oferta</h1><p>Usa importes en soles con la misma base tributaria. Incluye el costo de todas las sedes y del personal requerido por las bases.</p></section>
+<form class="panel" id="costos"><div class="cost-grid">
+{% for name,label in [('oferta','Oferta total (S/)'),('meses','Duración en meses'),('personal','Personal por mes (S/)'),('operacion','Operación por mes (S/)'),('equipos','Equipos y otros costos únicos (S/)')] %}
+<label>{{ label }}<input required type="number" name="{{ name }}" min="{{ 1 if name=='meses' else ('0.01' if name=='oferta' else 0) }}" step="{{ 1 if name=='meses' else '0.01' }}" {% if name=='meses' %}value="1"{% endif %}></label>{% endfor %}</div><button>Calcular margen</button><p><output id="margen" aria-live="polite"></output></p></form>{% endblock %}

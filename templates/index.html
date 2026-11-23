@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="intro">
-  <div class="scope">{{ 'Muestra ficticia' if origen == 'demo' else 'Archivos importados · Sin sincronización automática' }}</div>
-  <h1>Busca contrataciones públicas</h1>
+  <h1>Buscador y alertas</h1>
   <p>Filtra procesos y consulta adjudicaciones comparables antes de preparar una oferta.</p>
 </section>
-<form method="get" class="filters" aria-label="Filtros de búsqueda">
-  <input type="hidden" name="origen" value="{{ origen }}">
+<form method="get" action="{{ url_for('buscar') }}" class="filters" aria-label="Filtros de búsqueda">
+  <label>Catálogo<select name="origen"><option value="demo">Expedientes de práctica</option><option value="oece"{% if origen == "oece" %} selected{% endif %}>Registros OECE importados</option></select></label>
   <label class="query">Palabras clave<input name="q" maxlength="150" value="{{ filtros.q }}" placeholder="Ej. limpieza, red de salud o código"></label>
   <label>Región de la entidad
     <select name="region"><option value="">Todas</option>
@@ -28,17 +27,19 @@
   <a href="{{ url_for('buscar', origen=origen) }}">Limpiar</a>
 </form>
 
+<section class="panel" id="alertas"><h2>Mis alertas</h2><p>Guarda los filtros aplicados para revisar sus coincidencias en este dispositivo.</p><button type="button" id="guardar-alerta">Guardar búsqueda actual</button><ul id="mis-alertas"></ul><p role="status" id="estado-alerta"></p></section>
+<div id="avisos-cierre" role="status"></div>
 <div class="section-heading"><h2>Convocatorias</h2><span>{{ total }} {{ 'resultado' if total == 1 else 'resultados' }}</span></div>
 <div class="cards">
   {% for proceso in resultados %}
-  <article class="card">
+  <article class="card" data-cierre="{{ proceso.cierre or '' }}" data-activo="{{ proceso.estado }}">
     <p class="tag">{{ objetos.get(proceso.objeto, proceso.objeto or 'Objeto sin dato') }} · {{ estados.get(proceso.estado, proceso.estado or 'Estado sin dato') }}</p>
     <h3><a href="{{ url_for('expediente', origen=origen, ocid=proceso.ocid) }}">{{ proceso.titulo }}</a></h3>
     <p>{{ proceso.entidad or 'Entidad sin dato' }} · {{ proceso.region or 'Región sin dato' }}</p>
     <p class="meta"><strong>{{ proceso.referencia | monto(proceso.moneda) }}</strong><span>Cierre {{ proceso.cierre[:10] if proceso.cierre else 'sin fecha' }}</span></p>
   </article>
   {% else %}
-  <p>{{ 'No se encontraron procesos con estos filtros.' if origen == 'demo' or filtros.values()|select|list else 'Aún no hay procesos en esta vista. Importa un archivo oficial con el comando del README.' }}</p>
+  <p>{{ 'No se encontraron procesos con estos filtros.' if origen == 'demo' or filtros.values()|select|list else 'Todavía no se han cargado registros OECE.' }}</p>
   {% endfor %}
 </div>
 {% if pagina > 1 or pagina * 15 < total %}

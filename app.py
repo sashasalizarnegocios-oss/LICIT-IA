@@ -1,7 +1,7 @@
 import os
 import re
 
-from flask import Flask, abort, render_template, request
+from flask import Flask, abort, redirect, render_template, request, url_for
 
 from asistente import MODELO, consultar
 from datos import ESTADOS, OBJETOS, OECE, ROOT, SEACE, conectar, importar_ocds, normalizar
@@ -42,6 +42,36 @@ def equipo():
 
 
 @app.get("/")
+def inicio():
+    if request.args:
+        return redirect(url_for("buscar") + "?" + request.query_string.decode("ascii"))
+    return render_template("inicio.html")
+
+
+@app.get("/propuesta")
+def propuesta():
+    return render_template("propuesta.html")
+
+
+@app.get("/analisis")
+def analisis():
+    with conectar(app.config["DATABASE"]) as db:
+        procesos = db.execute("""SELECT origen, ocid, titulo, entidad FROM convocatorias
+                                 ORDER BY (origen = 'oece') DESC, fecha DESC LIMIT 100""").fetchall()
+    return render_template("analisis.html", procesos=procesos)
+
+
+@app.get("/viabilidad")
+def viabilidad():
+    return render_template("viabilidad.html")
+
+
+@app.get("/fuentes")
+def fuentes():
+    return render_template("fuentes.html")
+
+
+@app.get("/buscador")
 def buscar():
     origen = request.args.get("origen", "demo")
     if origen not in ("demo", "oece"):

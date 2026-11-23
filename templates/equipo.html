@@ -1,37 +1,6 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Equipo fundador · LICITia</title>
-<style>
-* { box-sizing: border-box; }
-body { margin: 0; background: #faf9f6; color: #10233b; font-family: Inter, Arial, sans-serif; }
-nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem max(6vw, 1.25rem); border-bottom: 1px solid #d7d8d4; }
-a { color: inherit; text-underline-offset: .25em; }
-.brand { font: bold 1.6rem Georgia, serif; text-decoration: none; }
-.brand i { color: #826535; }
-main { display: grid; grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.5fr); gap: clamp(2rem, 6vw, 7rem); max-width: 92rem; margin: auto; padding: clamp(2rem, 6vw, 6rem) max(6vw, 1.25rem); }
-header { background: #10233b; color: #faf9f6; padding: clamp(1.5rem, 3vw, 3.75rem); align-self: stretch; position: relative; overflow: hidden; }
-header::after { content:""; position:absolute; width:115%; aspect-ratio:1; border:1px solid #bca572; border-radius:50%; left:22%; bottom:-42%; box-shadow:0 0 0 22px #10233b, 0 0 0 23px #66717b, 0 0 0 48px #10233b, 0 0 0 49px #465463; pointer-events:none; }
-h1 { position:relative; z-index:1; margin:0; font:normal clamp(2.5rem, 4.3vw, 4.8rem)/1.06 Georgia, serif; letter-spacing:-.055em; }
-h1 em { display:block; color:#e2c993; font-weight:normal; }
-ul { list-style:none; margin:0; padding:0; }
-li { border-top:1px solid #c4c9ca; padding:1.45rem 0; }
-li:last-child { border-bottom:1px solid #c4c9ca; }
-h2 { font:normal clamp(1.4rem, 2.2vw, 2.25rem)/1.18 Georgia, serif; margin:0 0 .85rem; letter-spacing:-.025em; }
-.contact { display:flex; align-items:center; gap:.5rem 1rem; flex-wrap:wrap; font-size:.92rem; }
-.contact span { margin-right:auto; }
-.contact a { color:#39536b; font-size:.85rem; padding:.4rem 0; }
-a:focus-visible { outline:2px solid #96783d; outline-offset:4px; }
-@media(max-width:760px) { main { grid-template-columns:1fr; gap:1.5rem; } header { min-height:10rem; } header::after { width:14rem; left:75%; bottom:-110%; } }
-</style>
-</head>
-<body>
-<nav aria-label="Navegación principal"><a class="brand" href="{{ url_for('buscar') }}">LICIT<i>ia</i></a><a href="{{ url_for('buscar') }}">Volver al buscador</a></nav>
-<main>
-<header><h1>Equipo <em>fundador</em></h1></header>
-<ul aria-label="Integrantes">
+{% extends "base.html" %}
+{% block title %}Equipo fundador · LicitIA{% endblock %}
+{% block content %}<section class="team-layout"><header class="team-heading"><h1>Equipo <em>fundador</em></h1></header><ul aria-label="Integrantes">
   <li>
     <h2>Nelida Cutiri Quispe</h2>
     <div class="contact">
@@ -65,6 +34,4 @@ a:focus-visible { outline:2px solid #96783d; outline-offset:4px; }
     </div>
   </li>
 </ul>
-</main>
-</body>
-</html>
+</section>{% endblock %}

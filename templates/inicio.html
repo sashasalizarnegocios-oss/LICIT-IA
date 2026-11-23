@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero"><div>
+<span class="eyebrow">Proyecto legaltech · Contratación pública en Perú</span>
+<h1>LicitIA: De la convocatoria a la decisión de postular</h1>
+<p><strong>¿Podemos postular y cómo lo acreditamos?</strong> Reúne convocatorias, requisitos de bases integradas y antecedentes del OECE para que cada empresa y su asesor legal decidan con evidencia verificable si conviene preparar una oferta.</p>
+<div class="chips"><span>Bases integradas vigentes</span><span>Cruce con experiencia acreditada</span><span>Citas exactas de actas OECE</span></div>
+<div class="actions"><a class="primary" href="{{ url_for('buscar') }}">Probar buscador y cruce de evidencia&nbsp; ⌕</a><a class="secondary" href="{{ url_for('propuesta') }}#etapas">Ver flujo en 4 etapas</a></div>
+</div><aside class="radar"><div class="radar-top">Radar de evidencia <small>01/04 · Perú</small></div>
+<div class="scope-map" aria-hidden="true"><div class="target"><i></i><i></i><i></i></div><span class="pin upper">Bases integradas v.2</span><span class="pin lower">Historial OECE</span></div>
+<div class="radar-foot"><span>Empresas y asesores legales</span><a href="{{ url_for('analisis') }}">Revisar evidencia →</a></div>
+</aside></section>{% endblock %}

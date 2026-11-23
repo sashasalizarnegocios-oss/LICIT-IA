@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<section class="intro"><span class="scope">Propuesta</span><h1>Decidir con el expediente a la vista</h1><p>Una empresa puede cumplir el requisito técnico y aun así presentar una oferta inviable. LicitIA reúne la revisión documental, los antecedentes de contratación y los costos en un mismo recorrido.</p></section>
+<section id="etapas"><h2>El flujo en cuatro etapas</h2><div class="cards">{% for title,copy,endpoint,cta in [
+('Perfil y acreditaciones','Identifica los contratos, constancias y conformidades que respaldan la experiencia de tu empresa.','buscar','Elegir convocatoria'),
+('Búsqueda y alertas','Filtra oportunidades por región, objeto y estado. Guarda las búsquedas que quieras seguir.','buscar','Abrir buscador'),
+('Revisión de bases','Contrasta el alcance con los antecedentes y revisa los requisitos en la versión vigente de las bases.','analisis','Revisar expedientes'),
+('Preparación de la oferta','Compara adjudicaciones y estima el costo de ejecutar el contrato antes de fijar tu oferta.','viabilidad','Calcular viabilidad')] %}
+<article class="card"><p class="tag">Etapa {{ loop.index }}</p><h3>{{ title }}</h3><p>{{ copy }}</p><a href="{{ url_for(endpoint) }}">{{ cta }} →</a></article>{% endfor %}</div></section>
+<p><a href="{{ url_for('equipo') }}">Conocer al equipo fundador →</a></p>{% endblock %}

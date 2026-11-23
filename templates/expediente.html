@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}{{ proceso.titulo }} | Radar Público{% endblock %}
+{% block title %}{{ proceso.titulo }} | LicitIA{% endblock %}
 {% block content %}
 <section class="intro">
   <a href="{{ url_for('buscar', origen=origen) }}">← Volver a la búsqueda</a>
-  <div class="scope">{{ 'Muestra ficticia' if origen == 'demo' else 'Datos importados de archivo OCDS' }} · {{ proceso.ocid }}</div>
+  <div class="scope">{{ proceso.ocid }}</div>
   <h1>{{ proceso.titulo }}</h1>
   <p>{{ proceso.entidad or 'Entidad sin dato' }} · {{ proceso.region or 'Región sin dato' }}</p>
   <p>{{ proceso.descripcion or '' }}</p>
@@ -16,6 +16,11 @@
   {% elif origen == 'oece' %}<a href="{{ seace }}">Buscar el expediente en SEACE</a>{% endif %}
 </section>
 
+<section class="panel"><h2>Cruce de evidencia</h2><p>Registra la cláusula y la página de las bases junto con el documento que la acredita. La revisión se guarda en este dispositivo para este expediente.</p>
+<form id="evidencia" data-expediente="{{ origen }}/{{ proceso.ocid }}">
+<label>Requisito y referencia en las bases<input name="requisito" required maxlength="250"></label>
+<label>Documento de la empresa<input name="documento" maxlength="250" placeholder="Pendiente de acreditar"></label>
+<button>Añadir al cruce</button></form><ul id="requisitos"></ul><p role="status" id="aviso-evidencia"></p></section>
 {% if propios %}
 <section class="panel">
   <h2>Adjudicaciones de este proceso</h2>
