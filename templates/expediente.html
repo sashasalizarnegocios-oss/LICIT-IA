@@ -44,17 +44,5 @@
   {% else %}<p>No hay antecedentes comparables en esta base.</p>{% endif %}
 </section>
 
-{% if casos %}
-<section class="panel" id="asistente">
-  <h2>Consulta con IA</h2>
-  <p>Ollama · {{ modelo }}. Revisa las referencias y las afirmaciones con los expedientes antes de decidir.</p>
-  <form method="post" action="#asistente" data-ollama-form>
-    <label>Pregunta<textarea name="pregunta" rows="3" maxlength="300" required>{{ pregunta or '¿Qué antecedentes son aplicables y qué debería verificar antes de comparar los montos?' }}</textarea></label>
-    <button type="submit">Analizar antecedentes</button>
-    <p data-ollama-status role="status"></p>
-  </form>
-  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
-  {% if analisis %}<h3>Respuesta de Ollama</h3><p class="response">{{ analisis }}</p>{% endif %}
-</section>
-{% endif %}
+<section class="panel"><h2>Conversar sobre este expediente</h2><a href="{{ url_for('analisis', documento=origen ~ '/' ~ proceso.ocid) }}">Elegir un segundo documento →</a></section>
 {% endblock %}

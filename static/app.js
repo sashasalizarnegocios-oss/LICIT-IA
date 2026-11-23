@@ -19,63 +19,6 @@ if (formulario) {
   });
 }
 
-const costos = document.querySelector("#costos");
-if (costos) {
-  costos.addEventListener("submit", event => {
-    event.preventDefault();
-    const valores = new FormData(costos);
-    const numero = campo => Number(valores.get(campo));
-    const costo = numero("meses") * (numero("personal") + numero("operacion")) + numero("equipos");
-    const margen = numero("oferta") - costo;
-    const soles = new Intl.NumberFormat("es-PE", {style:"currency", currency:"PEN"});
-    document.querySelector("#margen").textContent =
-      "Costo total: " + soles.format(costo) + " · Margen: " + soles.format(margen) +
-      " (" + (100 * margen / numero("oferta")).toFixed(1) + " %)";
-  });
-}
-const guardar = document.querySelector("#guardar-alerta");
-if (guardar) {
-  const clave = "licitia.busquedas.v1";
-  const estado = document.querySelector("#estado-alerta");
-  const lista = document.querySelector("#mis-alertas");
-  let alertas = [];
-  try {
-    const datos = JSON.parse(localStorage.getItem(clave) || "[]");
-    if (Array.isArray(datos)) alertas = datos.filter(item => typeof item === "string");
-  } catch { estado.textContent = "El almacenamiento del navegador está restringido."; }
-  const formulario = document.querySelector(".filters");
-  function guardarCambios() {
-    try { localStorage.setItem(clave, JSON.stringify(alertas)); }
-    catch { estado.textContent = "La búsqueda se conservará solo durante esta visita."; }
-  }
-  function mostrarAlertas() {
-    lista.replaceChildren();
-    for (const filtro of alertas) {
-      const params = new URLSearchParams(filtro);
-      const criterio = Array.from(params).filter(([k,v]) => k !== "origen" && v).map(([,v]) => v).join(" · ");
-      const item = document.createElement("li");
-      const enlace = document.createElement("a");
-      enlace.href = formulario.action.split("?")[0] + "?" + filtro;
-      enlace.textContent = criterio || "Todas las convocatorias";
-      const quitar = document.createElement("button");
-      quitar.type = "button";
-      quitar.textContent = "Quitar";
-      quitar.addEventListener("click", () => {
-        alertas = alertas.filter(value => value !== filtro);
-        guardarCambios(); mostrarAlertas();
-      });
-      item.append(enlace," ",quitar); lista.append(item);
-    }
-  }
-  guardar.addEventListener("click", () => {
-    const filtro = new URLSearchParams(new FormData(formulario)).toString();
-    if (!alertas.includes(filtro)) alertas.push(filtro);
-    estado.textContent = "Búsqueda guardada.";
-    guardarCambios(); mostrarAlertas();
-  });
-  mostrarAlertas();
-}
-
 const evidencia = document.querySelector("#evidencia");
 if (evidencia) {
   const clave = "licitia.evidencia." + evidencia.dataset.expediente;
@@ -127,4 +70,74 @@ if (aviso) {
       aviso.append(linea);
     }
   }
+}
+
+for (const form of document.querySelectorAll("[data-alerta]")) {
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const estado = document.querySelector("#estado-alerta");
+    const datos = new FormData(form);
+    if (datos.get("accion") === "crear") {
+      for (const [k,v] of new FormData(document.querySelector(".filters"))) datos.set(k,v);
+    }
+    const boton = form.querySelector("button");
+    boton.disabled = true;
+    try {
+      const res = await fetch(form.action,{method:"POST",body:datos});
+      const info = await res.json();
+      estado.textContent = info.mensaje || info.error;
+      if (res.ok && datos.get("accion") === "crear") document.querySelector("#alertas details").open = true;
+    } catch { estado.textContent = "No se pudo contactar con el servidor."; }
+    finally { boton.disabled = false; }
+  });
+}
+
+const chat = document.querySelector("#chat");
+if (chat) {
+  const docs = [...document.querySelectorAll(".documento")];
+  const enlaces = document.querySelectorAll(".ver-doc");
+  const lista = document.querySelector("#mensajes");
+  const estado = document.querySelector("#estado-chat");
+  const boton = chat.querySelector("button");
+  const campo = chat.elements.pregunta;
+  let historial = [];
+  function seleccionar(){
+    historial = [];
+    lista.replaceChildren();
+    docs.forEach((doc,i) => {
+      enlaces[i].hidden = !doc.value;
+      if(doc.value) enlaces[i].href = doc.selectedOptions[0].dataset.url;
+    });
+    boton.disabled = !docs.every(d=>d.value) || docs[0].value === docs[1].value;
+    estado.textContent = boton.disabled ? "Elige dos expedientes distintos para empezar." : "¿Qué quieres comparar?";
+  }
+  function mostrar(rol,texto){
+    const p = document.createElement("p");
+    p.className = rol;
+    p.textContent = texto;
+    lista.append(p); lista.scrollTop = lista.scrollHeight;
+    return p;
+  }
+  docs.forEach(d=>d.addEventListener("change",seleccionar));
+  seleccionar();
+  chat.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const pregunta = campo.value.trim();
+    if(boton.disabled || !pregunta) return;
+    const turno = {role:"user",content:pregunta};
+    const mensaje = mostrar("usuario",pregunta);
+    boton.disabled = true; campo.disabled = true;
+    docs.forEach(d=>d.disabled=true);
+    estado.textContent = "Ollama está revisando ambos expedientes…";
+    try {
+      const res = await fetch(chat.action,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({documentos:docs.map(d=>d.value),historial:[...historial.slice(-8),turno]})});
+      const datos = await res.json();
+      if(!res.ok) throw new Error(datos.error || "No se pudo completar la consulta.");
+      mostrar("asistente",datos.respuesta);
+      historial.push(turno,{role:"assistant",content:datos.respuesta.slice(0,4000)});
+      campo.value=""; estado.textContent="";
+    } catch(error) { mensaje.remove(); estado.textContent=error.message; }
+    finally { boton.disabled=false; campo.disabled=false; docs.forEach(d=>d.disabled=false); campo.focus(); }
+  });
 }

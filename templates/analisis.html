@@ -1,2 +1,17 @@
-{% extends "base.html" %}{% block content %}<section class="intro"><span class="scope">Análisis con IA</span><h1>Contrasta los antecedentes</h1><p>Elige un expediente para revisar adjudicatarios, montos y fechas. Si hay antecedentes comparables, puedes formular una pregunta sobre esos registros.</p></section>
-<div class="cards">{% for p in procesos %}<article class="card"><p class="tag">{{ p.entidad }}</p><h3>{{ p.titulo }}</h3><a href="{{ url_for('expediente',origen=p.origen,ocid=p.ocid) }}">Analizar expediente →</a></article>{% else %}<p>Aún no hay expedientes disponibles.</p>{% endfor %}</div>{% endblock %}
+{% extends "base.html" %}
+{% block title %}Análisis con IA · LicitIA{% endblock %}
+{% block content %}
+<section class="intro"><h1>Análisis con IA</h1><p>Selecciona dos expedientes del catálogo y conversa sobre sus datos y adjudicaciones.</p></section>
+<div class="mesa">
+<aside class="panel documentos"><h2>Documentos</h2>
+{% for letra in ['A','B'] %}
+<label>Documento {{ letra }}<select class="documento" required><option value="">Seleccionar expediente</option>
+{% for p in procesos %}{% set clave = p.origen ~ '/' ~ p.ocid %}
+<option value="{{ clave }}" data-url="{{ url_for('expediente', origen=p.origen, ocid=p.ocid) }}" {% if letra=='A' and request.args.get('documento')==clave %}selected{% endif %}>{{ p.titulo }} · {{ p.ocid }}</option>
+{% endfor %}</select></label><a class="ver-doc" hidden>Ver ficha {{ letra }} →</a>
+{% endfor %}
+<p>Cambiar de documento inicia una conversación nueva.</p></aside>
+<section class="panel conversacion"><h2>Chat con los documentos</h2>
+<div id="mensajes" role="log" aria-live="polite"></div><p id="estado-chat" role="status"></p>
+<form id="chat" action="{{ url_for('chat') }}"><label>Tu pregunta<textarea name="pregunta" rows="2" maxlength="1200" required placeholder="¿Qué diferencias hay entre ambos expedientes?"></textarea></label><button>Enviar pregunta</button></form>
+</section></div>{% endblock %}

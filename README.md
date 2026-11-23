@@ -95,3 +95,11 @@ El equipo debe indicar el modelo realmente probado y su papel como asistente de 
 
 **Pregunta para otro equipo**  
 ¿Cómo comprobarían que el resultado de su herramienta sigue siendo confiable cuando la fuente original cambia o está incompleta?
+
+## Chat y alertas de LicitIA
+
+En Análisis con IA se eligen dos fichas del catálogo SQLite. El chat envía sus datos y adjudicaciones a Ollama, junto a los últimos cuatro intercambios. Para ejecutar el modelo en el mismo equipo que Flask, inicia Ollama y descarga el modelo con `ollama pull qwen2.5:3b`.
+
+Para los correos configura `SMTP_HOST`, `SMTP_FROM`, `SMTP_PORT` (587 por defecto) y, si el proveedor requiere autenticación, `SMTP_USER` y `SMTP_PASSWORD` como variables de entorno o secretos de Codespaces. El transporte usa STARTTLS. Reinicia la aplicación después de configurar el correo.
+
+Al ejecutar `python app.py`, LicitIA comprueba cada cinco minutos los resúmenes pendientes. El destinatario confirma mediante un código enviado por correo. La primera entrega se programa una semana o un mes después de confirmar. El mensaje incluye hasta 50 coincidencias de la búsqueda y un código de cancelación. Mantén el servicio en ejecución y la base SQLite en almacenamiento persistente. Un Codespace suspendido reanuda las entregas pendientes al volver a iniciar la aplicación. En servidores WSGI externos, programa la ejecución de `alertas.despachar(app.config["DATABASE"])` desde un proceso que importe la aplicación.

@@ -30,3 +30,14 @@ CREATE TABLE IF NOT EXISTS adjudicaciones (
 );
 CREATE INDEX IF NOT EXISTS convocatorias_filtros
     ON convocatorias (origen, objeto, region, estado);
+
+CREATE TABLE IF NOT EXISTS solicitudes (
+ codigo TEXT PRIMARY KEY, correo TEXT NOT NULL, frecuencia TEXT NOT NULL,
+ origen TEXT NOT NULL, filtros TEXT NOT NULL, creada TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS suscripciones (
+ token TEXT PRIMARY KEY, correo TEXT NOT NULL, frecuencia TEXT NOT NULL,
+ origen TEXT NOT NULL, filtros TEXT NOT NULL, proxima TEXT NOT NULL,
+ UNIQUE(correo, origen, filtros)
+);
+CREATE INDEX IF NOT EXISTS suscripciones_proxima ON suscripciones(proxima);

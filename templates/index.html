@@ -27,7 +27,17 @@
   <a href="{{ url_for('buscar', origen=origen) }}">Limpiar</a>
 </form>
 
-<section class="panel" id="alertas"><h2>Mis alertas</h2><p>Guarda los filtros aplicados para revisar sus coincidencias en este dispositivo.</p><button type="button" id="guardar-alerta">Guardar búsqueda actual</button><ul id="mis-alertas"></ul><p role="status" id="estado-alerta"></p></section>
+<section class="panel" id="alertas"><h2>Alertas por correo</h2>
+<p>Recibe las coincidencias de tu búsqueda con la frecuencia que elijas.</p>
+<form data-alerta action="{{ url_for('gestionar_alerta') }}" method="post" class="suscripcion">
+<input type="hidden" name="accion" value="crear">
+<label>Correo electrónico<input type="email" name="correo" required autocomplete="email"></label>
+<label>Frecuencia<select name="frecuencia"><option value="semanal">Semanal</option><option value="mensual">Mensual</option></select></label>
+<button>Solicitar alerta</button></form>
+<details><summary>Confirmar o cancelar una alerta</summary><form data-alerta action="{{ url_for('gestionar_alerta') }}" method="post" class="suscripcion">
+<label>Código del correo<input name="codigo" required></label>
+<label>Acción<select name="accion"><option value="confirmar">Confirmar alerta</option><option value="cancelar">Cancelar alerta</option></select></label><button>Aplicar</button></form></details>
+<p role="status" id="estado-alerta"></p></section>
 <div id="avisos-cierre" role="status"></div>
 <div class="section-heading"><h2>Convocatorias</h2><span>{{ total }} {{ 'resultado' if total == 1 else 'resultados' }}</span></div>
 <div class="cards">
