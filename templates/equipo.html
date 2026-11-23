@@ -3,76 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Equipo fundador | LICITia</title>
+<title>Equipo fundador · LICITia</title>
 <style>
-  :root { color-scheme: light; }
-  body { margin: 0; }
-  .licitia-team {
-    --navy: #0e1d35;
-    --gold: #c9ad70;
-    --line: #dce4ed;
-    background: #f3f6fa;
-    color: var(--navy);
-    font-family: Inter, system-ui, sans-serif;
-    min-height: 100vh;
-  }
-  .licitia-team * { box-sizing: border-box; }
-  .team-inner { width: min(68rem, calc(100% - 2.5rem)); margin-inline: auto; }
-  .team-header {
-    padding: clamp(3rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
-    background: var(--navy);
-    color: white;
-  }
-  .team-brand { font-size: 1.15rem; font-weight: 700; letter-spacing: .03em; }
-  .team-brand span { color: var(--gold); }
-  .team-header h1 {
-    margin: 1.8rem 0 0;
-    font: 400 clamp(2.75rem, 8vw, 5.5rem)/1 "Source Serif 4", Georgia, serif;
-    letter-spacing: -.04em;
-  }
-  .team-list {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin: -1.45rem 0 0;
-    padding: 0;
-    background: var(--line);
-    border: 1px solid var(--line);
-    list-style: none;
-  }
-  .team-list li { background: #fff; padding: clamp(1.5rem, 4vw, 3rem); }
-  .team-list h2 {
-    margin: 0;
-    font: 400 clamp(1.45rem, 3vw, 2.1rem)/1.2 "Source Serif 4", Georgia, serif;
-  }
-  .team-list h2::before {
-    content: "";
-    display: block;
-    width: 1.8rem;
-    border-top: 2px solid var(--gold);
-    margin-bottom: 1.2rem;
-  }
-  .team-content { padding-bottom: clamp(3rem, 8vw, 7rem); }
-  @media (max-width: 37rem) { .team-list { grid-template-columns: minmax(0, 1fr); } }
+* { box-sizing: border-box; }
+body { margin: 0; background: #faf9f6; color: #10233b; font-family: Inter, Arial, sans-serif; }
+nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem max(6vw, 1.25rem); border-bottom: 1px solid #d7d8d4; }
+a { color: inherit; text-underline-offset: .25em; }
+.brand { font: bold 1.6rem Georgia, serif; text-decoration: none; }
+.brand i { color: #826535; }
+main { display: grid; grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.5fr); gap: clamp(2rem, 6vw, 7rem); max-width: 92rem; margin: auto; padding: clamp(2rem, 6vw, 6rem) max(6vw, 1.25rem); }
+header { background: #10233b; color: #faf9f6; padding: clamp(1.5rem, 3vw, 3.75rem); align-self: stretch; position: relative; overflow: hidden; }
+header::after { content:""; position:absolute; width:115%; aspect-ratio:1; border:1px solid #bca572; border-radius:50%; left:22%; bottom:-42%; box-shadow:0 0 0 22px #10233b, 0 0 0 23px #66717b, 0 0 0 48px #10233b, 0 0 0 49px #465463; pointer-events:none; }
+h1 { position:relative; z-index:1; margin:0; font:normal clamp(2.5rem, 4.3vw, 4.8rem)/1.06 Georgia, serif; letter-spacing:-.055em; }
+h1 em { display:block; color:#e2c993; font-weight:normal; }
+ul { list-style:none; margin:0; padding:0; }
+li { border-top:1px solid #c4c9ca; padding:1.45rem 0; }
+li:last-child { border-bottom:1px solid #c4c9ca; }
+h2 { font:normal clamp(1.4rem, 2.2vw, 2.25rem)/1.18 Georgia, serif; margin:0 0 .85rem; letter-spacing:-.025em; }
+.contact { display:flex; align-items:center; gap:.5rem 1rem; flex-wrap:wrap; font-size:.92rem; }
+.contact span { margin-right:auto; }
+.contact a { color:#39536b; font-size:.85rem; padding:.4rem 0; }
+a:focus-visible { outline:2px solid #96783d; outline-offset:4px; }
+@media(max-width:760px) { main { grid-template-columns:1fr; gap:1.5rem; } header { min-height:10rem; } header::after { width:14rem; left:75%; bottom:-110%; } }
 </style>
 </head>
 <body>
-<main class="licitia-team" aria-labelledby="team-title">
-  <header class="team-header">
-    <div class="team-inner">
-      <a class="team-brand" style="color:inherit;text-decoration:none" href="{{ url_for('buscar') }}" aria-label="LICITia, ir al buscador">LICIT<span>ia</span></a>
-      <h1 id="team-title">Equipo fundador</h1>
+<nav aria-label="Navegación principal"><a class="brand" href="{{ url_for('buscar') }}">LICIT<i>ia</i></a><a href="{{ url_for('buscar') }}">Volver al buscador</a></nav>
+<main>
+<header><h1>Equipo <em>fundador</em></h1></header>
+<ul aria-label="Integrantes">
+  <li>
+    <h2>Nelida Cutiri Quispe</h2>
+    <div class="contact">
+      <span>ncutiri@licit.ia</span>
+      <a href="tel:+51910299015" aria-label="Llamar a Nelida">Llamar</a>
+      <a href="https://pe.linkedin.com/in/nelida-cutiri-quispe-8937a533b" aria-label="LinkedIn de Nelida">LinkedIn</a>
     </div>
-  </header>
-  <div class="team-inner team-content">
-    <ul class="team-list" role="list">
-      <li><h2>Nelida Cutiri Quispe</h2></li>
-      <li><h2>Rubi Stefany Calero Palomares</h2></li>
-      <li><h2>Sasha Mellrouse Salizar Cuba</h2></li>
-      <li><h2>Valeria Adriana Maldonado Andia</h2></li>
-    </ul>
-  </div>
+  </li>
+  <li>
+    <h2>Rubi Stefany Calero Palomares</h2>
+    <div class="contact">
+      <span>rcalero@licit.ia</span>
+      <a href="tel:+51916960285" aria-label="Llamar a Rubi Stefany">Llamar</a>
+      <a href="https://www.linkedin.com/in/stefany-palomares-7b4230451" aria-label="LinkedIn de Rubi Stefany">LinkedIn</a>
+    </div>
+  </li>
+  <li>
+    <h2>Sasha Mellrouse Salizar Cuba</h2>
+    <div class="contact">
+      <span>ssalizar@licit.ia</span>
+      <a href="tel:+51912214186" aria-label="Llamar a Sasha Mellrouse">Llamar</a>
+      <a href="https://www.linkedin.com/in/sashasalizar/" aria-label="LinkedIn de Sasha Mellrouse">LinkedIn</a>
+    </div>
+  </li>
+  <li>
+    <h2>Valeria Adriana Maldonado Andia</h2>
+    <div class="contact">
+      <span>amaldonado@licit.ia</span>
+      <a href="tel:+51906510071" aria-label="Llamar a Valeria Adriana">Llamar</a>
+      <a href="https://www.linkedin.com/in/valeria-maldonado-andia-7b4036427/" aria-label="LinkedIn de Valeria Adriana">LinkedIn</a>
+    </div>
+  </li>
+</ul>
 </main>
 </body>
 </html>
