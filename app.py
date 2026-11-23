@@ -36,6 +36,11 @@ def etiquetas():
     return {"objetos": OBJETOS, "estados": ESTADOS, "oece": OECE, "seace": SEACE, "modelo": MODELO}
 
 
+@app.get("/equipo")
+def equipo():
+    return render_template("equipo.html")
+
+
 @app.get("/")
 def buscar():
     origen = request.args.get("origen", "demo")

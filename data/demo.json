@@ -1,0 +1,317 @@
+{
+  "version": "1.1",
+  "records": [
+    {
+      "ocid": "DEMO-01",
+      "compiledRelease": {
+        "ocid": "DEMO-01",
+        "date": "2026-11-03T14:00:00-05:00",
+        "buyer": {
+          "name": "Municipalidad Demo Costa",
+          "id": "entidad-01"
+        },
+        "parties": [
+          {
+            "name": "Municipalidad Demo Costa",
+            "id": "entidad-01",
+            "address": {
+              "region": "Lima"
+            }
+          }
+        ],
+        "tender": {
+          "id": "01",
+          "title": "Limpieza integral de sedes administrativas",
+          "description": "Servicio de limpieza de tres sedes durante doce meses.",
+          "status": "active",
+          "mainProcurementCategory": "services",
+          "value": {
+            "amount": 285000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2026-11-03T09:00:00-05:00",
+            "endDate": "2026-12-18T17:00:00-05:00"
+          }
+        },
+        "awards": []
+      }
+    },
+    {
+      "ocid": "DEMO-02",
+      "compiledRelease": {
+        "ocid": "DEMO-02",
+        "date": "2026-03-20T14:00:00-05:00",
+        "buyer": {
+          "name": "Municipalidad Demo Parque",
+          "id": "entidad-02"
+        },
+        "parties": [
+          {
+            "name": "Municipalidad Demo Parque",
+            "id": "entidad-02",
+            "address": {
+              "region": "Lima"
+            }
+          }
+        ],
+        "tender": {
+          "id": "02",
+          "title": "Limpieza integral de sedes municipales",
+          "description": "Servicio de limpieza de dos sedes durante doce meses.",
+          "status": "complete",
+          "mainProcurementCategory": "services",
+          "value": {
+            "amount": 255000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2026-02-05T09:00:00-05:00",
+            "endDate": "2026-03-05T17:00:00-05:00"
+          }
+        },
+        "awards": [
+          {
+            "id": "ADJ-02",
+            "status": "active",
+            "suppliers": [
+              {
+                "name": "Limpieza Ejemplo S.A.C."
+              }
+            ],
+            "value": {
+              "amount": 241500,
+              "currency": "PEN"
+            },
+            "date": "2026-03-20T09:00:00-05:00"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "DEMO-03",
+      "compiledRelease": {
+        "ocid": "DEMO-03",
+        "date": "2025-08-15T14:00:00-05:00",
+        "buyer": {
+          "name": "Red de Salud Demo",
+          "id": "entidad-03"
+        },
+        "parties": [
+          {
+            "name": "Red de Salud Demo",
+            "id": "entidad-03",
+            "address": {
+              "region": "Lima"
+            }
+          }
+        ],
+        "tender": {
+          "id": "03",
+          "title": "Limpieza de sedes y centros de atención",
+          "description": "Servicio de limpieza de dos centros durante nueve meses.",
+          "status": "complete",
+          "mainProcurementCategory": "services",
+          "value": {
+            "amount": 200000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2025-07-01T09:00:00-05:00",
+            "endDate": "2025-07-31T17:00:00-05:00"
+          }
+        },
+        "awards": [
+          {
+            "id": "ADJ-03",
+            "status": "active",
+            "suppliers": [
+              {
+                "name": "Servicios Referencia S.A.C."
+              }
+            ],
+            "value": {
+              "amount": 187000,
+              "currency": "PEN"
+            },
+            "date": "2025-08-15T09:00:00-05:00"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "DEMO-04",
+      "compiledRelease": {
+        "ocid": "DEMO-04",
+        "date": "2026-10-20T14:00:00-05:00",
+        "buyer": {
+          "name": "Universidad Demo Sur",
+          "id": "entidad-04"
+        },
+        "parties": [
+          {
+            "name": "Universidad Demo Sur",
+            "id": "entidad-04",
+            "address": {
+              "region": "Arequipa"
+            }
+          }
+        ],
+        "tender": {
+          "id": "04",
+          "title": "Mantenimiento de equipos informáticos",
+          "description": "Mantenimiento preventivo de infraestructura informática.",
+          "status": "active",
+          "mainProcurementCategory": "services",
+          "value": {
+            "amount": 96000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2026-10-20T09:00:00-05:00",
+            "endDate": "2026-12-22T17:00:00-05:00"
+          }
+        },
+        "awards": []
+      }
+    },
+    {
+      "ocid": "DEMO-05",
+      "compiledRelease": {
+        "ocid": "DEMO-05",
+        "date": "2026-05-10T14:00:00-05:00",
+        "buyer": {
+          "name": "Municipalidad Demo Valle",
+          "id": "entidad-05"
+        },
+        "parties": [
+          {
+            "name": "Municipalidad Demo Valle",
+            "id": "entidad-05",
+            "address": {
+              "region": "Cusco"
+            }
+          }
+        ],
+        "tender": {
+          "id": "05",
+          "title": "Adquisición de equipos informáticos",
+          "description": "Adquisición de computadoras para oficinas.",
+          "status": "complete",
+          "mainProcurementCategory": "goods",
+          "value": {
+            "amount": 77000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2026-04-02T09:00:00-05:00",
+            "endDate": "2026-04-26T17:00:00-05:00"
+          }
+        },
+        "awards": [
+          {
+            "id": "ADJ-05",
+            "status": "active",
+            "suppliers": [
+              {
+                "name": "Tecnología Ejemplo S.A.C."
+              }
+            ],
+            "value": {
+              "amount": 72300,
+              "currency": "PEN"
+            },
+            "date": "2026-05-10T09:00:00-05:00"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "DEMO-06",
+      "compiledRelease": {
+        "ocid": "DEMO-06",
+        "date": "2026-11-13T14:00:00-05:00",
+        "buyer": {
+          "name": "Municipalidad Demo Valle",
+          "id": "entidad-06"
+        },
+        "parties": [
+          {
+            "name": "Municipalidad Demo Valle",
+            "id": "entidad-06",
+            "address": {
+              "region": "Cusco"
+            }
+          }
+        ],
+        "tender": {
+          "id": "06",
+          "title": "Mejoramiento de vías urbanas",
+          "description": "Obra de mejoramiento vial.",
+          "status": "active",
+          "mainProcurementCategory": "works",
+          "value": {
+            "amount": 500000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2026-11-13T09:00:00-05:00",
+            "endDate": "2027-01-08T17:00:00-05:00"
+          }
+        },
+        "awards": []
+      }
+    },
+    {
+      "ocid": "DEMO-07",
+      "compiledRelease": {
+        "ocid": "DEMO-07",
+        "date": "2025-07-08T14:00:00-05:00",
+        "buyer": {
+          "name": "Universidad Demo Norte",
+          "id": "entidad-07"
+        },
+        "parties": [
+          {
+            "name": "Universidad Demo Norte",
+            "id": "entidad-07",
+            "address": {
+              "region": "La Libertad"
+            }
+          }
+        ],
+        "tender": {
+          "id": "07",
+          "title": "Mantenimiento preventivo de equipos informáticos",
+          "description": "Mantenimiento preventivo de equipos en una sede.",
+          "status": "complete",
+          "mainProcurementCategory": "services",
+          "value": {
+            "amount": 90000,
+            "currency": "PEN"
+          },
+          "tenderPeriod": {
+            "startDate": "2025-06-01T09:00:00-05:00",
+            "endDate": "2025-06-25T17:00:00-05:00"
+          }
+        },
+        "awards": [
+          {
+            "id": "ADJ-07",
+            "status": "active",
+            "suppliers": [
+              {
+                "name": "Soluciones Ejemplo S.A.C."
+              }
+            ],
+            "value": {
+              "amount": 84500,
+              "currency": "PEN"
+            },
+            "date": "2025-07-08T09:00:00-05:00"
+          }
+        ]
+      }
+    }
+  ]
+}

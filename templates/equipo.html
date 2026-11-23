@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equipo fundador | LICITia</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; }
+  .licitia-team {
+    --navy: #0e1d35;
+    --gold: #c9ad70;
+    --line: #dce4ed;
+    background: #f3f6fa;
+    color: var(--navy);
+    font-family: Inter, system-ui, sans-serif;
+    min-height: 100vh;
+  }
+  .licitia-team * { box-sizing: border-box; }
+  .team-inner { width: min(68rem, calc(100% - 2.5rem)); margin-inline: auto; }
+  .team-header {
+    padding: clamp(3rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
+    background: var(--navy);
+    color: white;
+  }
+  .team-brand { font-size: 1.15rem; font-weight: 700; letter-spacing: .03em; }
+  .team-brand span { color: var(--gold); }
+  .team-header h1 {
+    margin: 1.8rem 0 0;
+    font: 400 clamp(2.75rem, 8vw, 5.5rem)/1 "Source Serif 4", Georgia, serif;
+    letter-spacing: -.04em;
+  }
+  .team-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: -1.45rem 0 0;
+    padding: 0;
+    background: var(--line);
+    border: 1px solid var(--line);
+    list-style: none;
+  }
+  .team-list li { background: #fff; padding: clamp(1.5rem, 4vw, 3rem); }
+  .team-list h2 {
+    margin: 0;
+    font: 400 clamp(1.45rem, 3vw, 2.1rem)/1.2 "Source Serif 4", Georgia, serif;
+  }
+  .team-list h2::before {
+    content: "";
+    display: block;
+    width: 1.8rem;
+    border-top: 2px solid var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .team-content { padding-bottom: clamp(3rem, 8vw, 7rem); }
+  @media (max-width: 37rem) { .team-list { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<main class="licitia-team" aria-labelledby="team-title">
+  <header class="team-header">
+    <div class="team-inner">
+      <a class="team-brand" style="color:inherit;text-decoration:none" href="{{ url_for('buscar') }}" aria-label="LICITia, ir al buscador">LICIT<span>ia</span></a>
+      <h1 id="team-title">Equipo fundador</h1>
+    </div>
+  </header>
+  <div class="team-inner team-content">
+    <ul class="team-list" role="list">
+      <li><h2>Nelida Cutiri Quispe</h2></li>
+      <li><h2>Rubi Stefany Calero Palomares</h2></li>
+      <li><h2>Sasha Mellrouse Salizar Cuba</h2></li>
+      <li><h2>Valeria Adriana Maldonado Andia</h2></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>
