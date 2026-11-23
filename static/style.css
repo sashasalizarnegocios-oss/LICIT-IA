@@ -142,3 +142,28 @@ footer { margin-top:3rem; }
 @media(max-width:800px){.mesa {grid-template-columns:1fr;gap:0;}}
 .bar nav { flex: 0 1 auto; gap: clamp(1rem, 2.4vw, 2.7rem); margin-inline: 0; }
 @media(max-width:1150px){ .bar nav {flex-basis:100%;} }
+
+.team-layout li {
+  display: grid;
+  grid-template-columns: clamp(5.5rem, 12vw, 10rem) minmax(0, 1fr);
+  gap: .35rem clamp(.9rem, 2vw, 1.6rem);
+  align-items: center;
+}
+.team-layout h2 { align-self: end; margin: 0; }
+.team-layout .contact { align-self: start; }
+.team-layout li::before {
+  content: "";
+  grid-row: span 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  background: #eaf1f7 var(--portrait) var(--portrait-position, center) / cover no-repeat;
+  border-radius: 12px;
+}
+/* Los retratos siguen el orden alfabético del directorio de equipo. */
+.team-layout li:nth-child(1) { --portrait: url("equipo/nelida.webp"); --portrait-position: center top; }
+.team-layout li:nth-child(2) { --portrait: url("equipo/rubi.webp"); }
+.team-layout li:nth-child(3) { --portrait: url("equipo/sasha.webp"); --portrait-position: center 9%; }
+.team-layout li:nth-child(4) { --portrait: url("equipo/valeria.webp"); --portrait-position: center 47%; }
+.team-layout .contact { overflow-wrap: anywhere; }
